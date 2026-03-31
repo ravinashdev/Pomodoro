@@ -50,14 +50,11 @@ stop_button.grid(row=2, column=2)
 # Add a label Timer
 timer_label= Label(text="Timer", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN)
 timer_label.grid(row=0, column=1)
+# Add a label checkmark
 check_mark = Label(text="✓", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN)
 check_mark.grid(row=0, column=2)
 check_mark.config(fg=GREEN)
 check_mark.grid(row=3, column=1)
-
-
-
-
 
 
 
