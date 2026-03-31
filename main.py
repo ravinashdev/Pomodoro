@@ -40,7 +40,7 @@ canvas.create_image(125, 125, image=tomato_png)
 # TIMER
 # canvas.create_text(125, 150, text="00:00", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
 # canvas.grid(row=1, column=1)
-
+count_down_timer = CountDownTimer(canvas)
 
 # BUTTONS
 # Add a start and stop button

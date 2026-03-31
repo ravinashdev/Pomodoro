@@ -15,7 +15,6 @@ class CountDownTimer(Tk):
         self.countdown(self.seconds)
 
     def countdown(self, seconds):
-        self.config(text="")
         if seconds > 0:
             # Using divmod to return minutes_left and seconds_left in a tuple
             minutes_left, seconds_left = divmod(seconds, 60)
@@ -23,4 +22,4 @@ class CountDownTimer(Tk):
             # self.config( text=f" {minutes_left:02}:{seconds_left:02}")
             self.canvas.create_text(125, 150, text=f" {minutes_left:02}:{seconds_left:02}", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
             # Schedule the next update in 1000ms (1 second)
-            self.canvas.ontimer(lambda: self.countdown(seconds - 1), 1000)
+            self.canvas.after(1000, self.countdown(seconds-1))
