@@ -1,5 +1,6 @@
 # ---------------------------- IMPORTS ------------------------------- #
 from tkinter import *
+from count_down_timer import CountDownTimer
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -35,9 +36,11 @@ canvas = Canvas(window, width=250, height=250, highlightthickness=0)
 tomato_png = PhotoImage(file="tomato.png")
 # Create the image using a create_image module
 canvas.create_image(125, 125, image=tomato_png)
-# Add some text on top the image
-canvas.create_text(125, 150, text="00:00", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
-canvas.grid(row=1, column=1)
+
+# TIMER
+# canvas.create_text(125, 150, text="00:00", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
+# canvas.grid(row=1, column=1)
+
 
 # BUTTONS
 # Add a start and stop button
@@ -47,10 +50,10 @@ start_button.grid(row=2, column=0)
 stop_button.grid(row=2, column=2)
 
 # LABELS
-# Add a label Timer
+# Add a label Timer Title
 timer_label= Label(text="Timer", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN)
 timer_label.grid(row=0, column=1)
-# Add a label checkmark
+# Add a label Checkmark Symbol
 check_mark = Label(text="✓", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN)
 check_mark.grid(row=0, column=2)
 check_mark.config(fg=GREEN)
