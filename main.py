@@ -1,6 +1,6 @@
 # ---------------------------- IMPORTS ------------------------------- #
 from tkinter import *
-from count_down_timer import CountDownTimer
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -14,10 +14,18 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 # ---------------------------- FUNCTIONS ------------------------------- #
-def start_timer():
+def start_timer(seconds):
     print("Start Timer...")
+    count_down_timer(seconds)
 def stop_timer():
     print("Stop Timer...")
+def count_down_timer(seconds):
+    minutes_left, seconds_left = divmod(seconds, 60)
+    if seconds >= 0:
+        window.after(1000, count_down_timer, seconds-1)
+        # canvas.create_text(125, 150, text=f" {minutes_left:02}:{seconds_left:02}",font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
+        canvas.itemconfig(timer_digital_clock, text=f" {minutes_left:02}:{seconds_left:02}")
+        canvas.grid(row=1, column=1)
 # ---------------------------- TIMER RESET ------------------------------- #
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
@@ -38,13 +46,16 @@ tomato_png = PhotoImage(file="tomato.png")
 canvas.create_image(125, 125, image=tomato_png)
 
 # TIMER
-# canvas.create_text(125, 150, text="00:00", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
-# canvas.grid(row=1, column=1)
-count_down_timer = CountDownTimer(canvas)
+# timer_digital_clock = canvas.create_text(125, 150, text="00:00", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
+minutes_left = 0
+seconds_left = 0
+timer_digital_clock = canvas.create_text(120, 150, text=f" {minutes_left:02}:{seconds_left:02}",font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
+canvas.grid(row=1, column=1)
+
 
 # BUTTONS
 # Add a start and stop button
-start_button = Button(text="Start", command=lambda: start_timer())
+start_button = Button(text="Start", command=lambda: start_timer(10))
 stop_button = Button(text="Stop", command=lambda: stop_timer())
 start_button.grid(row=2, column=0)
 stop_button.grid(row=2, column=2)
