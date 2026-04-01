@@ -14,6 +14,7 @@ FONT_COLOR = "white"
 WORK_SECONDS = 1
 SHORT_BREAK_SECONDS = 2
 LONG_BREAK_SECONDS = 3
+TIMER_LOOP = None
 # ---------------------------- GLOBAL VARIABLES ------------------------------- #
 REPS = 1
 CHECKS = ""
@@ -34,8 +35,6 @@ def start_timer():
         global CHECKS
         count_down_timer(SHORT_BREAK_SECONDS)
         timer_label.config(text="Short Break Time", fg=PINK)
-        CHECKS += "✓"
-        check_mark.config(text=CHECKS)
     # Long break time is at the 8th REPS
     elif REPS == 8:
         count_down_timer(LONG_BREAK_SECONDS)
@@ -43,27 +42,31 @@ def start_timer():
     REPS += 1
     # ---------------------------- TIMER RESET ------------------------------- #
 def reset_timer():
-    print("Reset Timer...")
+    # print("Reset Timer...")
+    global CHECKS, TIMER_LOOP
+    CHECKS = ""
+    check_mark.config(text=CHECKS)
+    window.after_cancel(TIMER_LOOP)
+    timer_label.config(text="Pomodoro Timer", fg=GREEN)
+    start_button.config(state="normal")
     # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down_timer(seconds):
     minutes_left, seconds_left = divmod(seconds, 60)
     if seconds >= 0:
-        window.after(1000, count_down_timer, seconds-1)
+        global TIMER_LOOP
+        TIMER_LOOP = window.after(1000, count_down_timer, seconds-1)
         canvas.itemconfig(timer_digital_clock, text=f" {minutes_left:02}:{seconds_left:02}")
         canvas.grid(row=1, column=1)
         start_button.config(state="disabled")
     elif seconds < 0:
         global REPS, CHECKS
-        if REPS == 8:
+        if REPS in (1,3,5,7):
+            CHECKS += "✓"
+            check_mark.config(text=CHECKS)
+        elif REPS == 8:
             timer_label.config(text="Time's Up")
             start_button.config(state="normal")
-            REPS = 0
-            CHECKS = ""
-            check_mark.config(text=CHECKS)
         start_timer()
-def create_new_checkmark():
-    global REPS
-    tkinter.Label(text="✓", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN).grid(row=0, column=REPS).grid(row=3, column=REPS)
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Initialize the window
@@ -85,14 +88,12 @@ seconds_left = 0
 timer_digital_clock = canvas.create_text(120, 150, text=f" {minutes_left:02}:{seconds_left:02}",font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fill=FONT_COLOR)
 canvas.grid(row=1, column=1)
 
-
 # BUTTONS
 # Add a start and stop button
 start_button = Button(text="Start", command=lambda: start_timer())
-reset_button = Button(text="Stop", command=lambda: reset_timer())
-
+reset_button = Button(text="Reset", command=lambda: reset_timer())
 start_button.grid(row=2, column=0)
-stop_button.grid(row=2, column=2)
+reset_button.grid(row=2, column=2)
 
 # LABELS
 # Add a label Timer Title
