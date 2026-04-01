@@ -110,19 +110,20 @@ start_button.grid(row=2, column=0)
 reset_button.grid(row=2, column=2)
 
 # ENTRIES & Entry LABELS
-work_seconds_entry = Entry(width=10, highlightthickness=0)
+# WORK SECONDS
+work_seconds_entry = Entry(width=10, highlightthickness=0, justify="center")
 work_seconds_entry.insert(END, string="0")
 work_seconds_entry.grid(row=4, column=0)
 work_seconds_entry_label = Label(text="Work Seconds",font=(FONT_NAME, 18, FONT_STYLE))
 work_seconds_entry_label.grid(ipadx=20, ipady=20, row=5, column=0)
-
-short_break_seconds_entry =Entry(width=10, highlightthickness=0)
+# SHORT BREAK SECOND
+short_break_seconds_entry =Entry(width=10, highlightthickness=0, justify="center")
 short_break_seconds_entry.insert(END, string="0")
 short_break_seconds_entry.grid(row=4, column=1)
 short_break_seconds_entry_label = Label(text="Short Break Seconds",font=(FONT_NAME, 18, FONT_STYLE))
 short_break_seconds_entry_label.grid(ipadx=20, ipady=20, row=5, column=1)
-
-long_break_seconds_entry = Entry(width=10, highlightthickness=0)
+# LONG BREAK SECONDS
+long_break_seconds_entry = Entry(width=10, highlightthickness=0, justify="center")
 long_break_seconds_entry.insert(END, string="0")
 long_break_seconds_entry.grid(row=4, column=2)
 long_break_entry_label = Label(text="Long Break Seconds",font=(FONT_NAME, 18, FONT_STYLE))
