@@ -16,6 +16,7 @@ SHORT_BREAK_SECONDS = 20
 LONG_BREAK_SECONDS = 30
 REPS = 1
 # ---------------------------- FUNCTIONS ------------------------------- #
+# ---------------------------- TIMER RESET ------------------------------- #
 def start_timer():
     # print("Start Timer...")
     global REPS
@@ -31,8 +32,10 @@ def start_timer():
         count_down_timer(LONG_BREAK_SECONDS)
         timer_label.config(text="Long Break Time")
     REPS += 1
+    # ---------------------------- TIMER MECHANISM ------------------------------- #
 def stop_timer():
     print("Stop Timer...")
+    # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down_timer(seconds):
     minutes_left, seconds_left = divmod(seconds, 60)
     if seconds >= 0:
@@ -46,11 +49,6 @@ def count_down_timer(seconds):
 def create_new_checkmark():
     global REPS
     tkinter.Label(text="✓", font=(FONT_NAME, FONT_SIZE, FONT_STYLE), fg=GREEN).grid(row=0, column=REPS).grid(row=3, column=REPS)
-# ---------------------------- TIMER RESET ------------------------------- #
-
-# ---------------------------- TIMER MECHANISM ------------------------------- #
-
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Initialize the window
